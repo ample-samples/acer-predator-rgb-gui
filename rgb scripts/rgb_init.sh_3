@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Link to Github readme:
+# https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module
+
+
+mode=0
+red=0
+green=255
+blue=0
+
+
+/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 1 -cR "$red" -cG "$green" -cB "$blue"
+sleep 0.1
+/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 2 -cR "$red" -cG "$green" -cB "$blue"
+sleep 0.1
+/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 3 -cR "$red" -cG "$green" -cB "$blue"
+sleep 0.1
+/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 4 -cR "$red" -cG "$green" -cB "$blue"
+
+
