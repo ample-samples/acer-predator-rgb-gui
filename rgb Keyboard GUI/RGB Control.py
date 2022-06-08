@@ -120,31 +120,6 @@ class App(customtkinter.CTk):
 
         # ============ frame_right ============
 
-        self.radio_var = tkinter.IntVar(value=0)
-
-        self.label_radio_group = customtkinter.CTkLabel(master=self.frame_right,
-                                                        text="CTkRadioButton Group:")
-        self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
-
-        self.mode_select = customtkinter.CTkOptionMenu(master=self.frame_right,
-                                                       values=["option 1", "option 2"],
-                                                       command=self.optionmenu_callback)
-        self.mode_select.grid(row=1, column=2, pady=10, padx=20, sticky="n")
-
-        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
-                                                           value=0)
-
-        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
-                                                           value=1)
-        self.radio_button_2.grid(row=2, column=2, pady=10, padx=20, sticky="n")
-
-        self.radio_button_3 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
-                                                           value=2)
-        self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
-
         self.slider_r = customtkinter.CTkSlider(master=self.frame_right,
                                                 from_=0,
                                                 to=1,
@@ -213,6 +188,32 @@ class App(customtkinter.CTk):
                                                 text="CTkButton",
                                                 command=self.button_event)
         self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
+
+        self.radio_var = tkinter.IntVar(value=0)
+
+        self.label_radio_group = customtkinter.CTkLabel(master=self.frame_right,
+                                                        text="CTkRadioButton Group:")
+        self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
+
+        self.mode_select = customtkinter.CTkOptionMenu(master=self.frame_right,
+                                                       values=["option 1", "option 2"],
+                                                       command=self.optionmenu_callback)
+        self.mode_select.grid(row=1, column=2, pady=10, padx=20, sticky="n")
+
+        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.frame_right,
+                                                           variable=self.radio_var,
+                                                           value=0)
+
+        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.frame_right,
+                                                           variable=self.radio_var,
+                                                           value=1)
+        self.radio_button_2.grid(row=2, column=2, pady=10, padx=20, sticky="n")
+
+        self.radio_button_3 = customtkinter.CTkRadioButton(master=self.frame_right,
+                                                           variable=self.radio_var,
+                                                           value=2)
+        self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
+
 
         # set default values
         self.radio_button_1.select()
@@ -291,8 +292,14 @@ class App(customtkinter.CTk):
             zone = i
             print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {}'.format(mode, zone, red, green, blue)
                  )
-            subprocess.run([facer_path, '-m', '{}'.format(mode), '-z', '{}'.format(zone), '-cR', '{}'.format(red), '-cG', '{}'.format(green), '-cB', '{}'.format(blue)
-])
+            subprocess.run(
+                [facer_path,
+                 '-m', '{}'.format(mode),
+                 '-z', '{}'.format(zone),
+                 '-cR', '{}'.format(red),
+                 '-cG', '{}'.format(green),
+                 '-cB', '{}'.format(blue)]
+            )
     def print_red(self):
         print(str(self.red) + ' button')
 
