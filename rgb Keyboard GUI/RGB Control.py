@@ -119,7 +119,7 @@ class App(customtkinter.CTk):
         self.progressbar.grid(row=1, column=0, sticky="ew", padx=15, pady=15)
 
         # ============ frame_right ============
-
+        # SLIDER & LABEL RED
         self.slider_r = customtkinter.CTkSlider(master=self.frame_right,
                                                 from_=0,
                                                 to=1,
@@ -133,6 +133,7 @@ class App(customtkinter.CTk):
         self.label_r.grid(row=4, column=1, columnspan=1, pady=10, padx=0)
 
 
+        # SLIDER & LABEL GREEN
         self.slider_g = customtkinter.CTkSlider(master=self.frame_right,
                                                 from_=0,
                                                 to=1,
@@ -146,6 +147,7 @@ class App(customtkinter.CTk):
                                               text_font=("Roboto Medium", -16))  # font name and size in px
         self.label_g.grid(row=5, column=1, columnspan=1, pady=10, padx=0)
 
+        # SLIDER & LABEL BLUE
         self.slider_b = customtkinter.CTkSlider(master=self.frame_right,
                                                 from_=0,
                                                 to=1,
@@ -215,6 +217,13 @@ class App(customtkinter.CTk):
         self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
 
 
+        self.radio_button_4 = customtkinter.CTkRadioButton(master=self.frame_right,
+                                                           variable=self.radio_var,
+                                                           value=3)
+        self.radio_button_4.grid(row=4, column=2, pady=10, padx=20, sticky="n")
+
+
+
         # set default values
         self.radio_button_1.select()
         self.switch_2.select()
@@ -222,7 +231,7 @@ class App(customtkinter.CTk):
         self.slider_g.set(0)
         self.slider_b.set(0)
         self.progressbar.set(0)
-        self.radio_button_3.configure(state=tkinter.DISABLED)
+        # self.radio_button_3.configure(state=tkinter.DISABLED)
 
     def button_event(self):
         print("Button pressed")
