@@ -169,25 +169,17 @@ class App(customtkinter.CTk):
 
         self.slider_button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
-                                                       text="CTkButton",
+                                                       text="CTkButton 2",
                                                        command=self.button_event)
-        self.slider_button_2.grid(row=5, column=2, columnspan=1, pady=10, padx=20, sticky="we")
-
-        self.checkbox_button_1 = customtkinter.CTkButton(master=self.frame_right,
-                                                         height=25,
-                                                         text="CTkButton",
-                                                         border_width=3,   # <- custom border_width
-                                                         fg_color=None,   # <- no fg_color
-                                                         command=self.button_event)
-        self.checkbox_button_1.grid(row=6, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+        self.slider_button_2.grid(row=7, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
                                             width=120,
-                                            placeholder_text="CTkEntry")
+                                            placeholder_text="Save as")
         self.entry.grid(row=8, column=0, columnspan=2, pady=20, padx=20, sticky="we")
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_right,
-                                                text="CTkButton",
+                                                text="Save preset",
                                                 command=self.button_event)
         self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
@@ -197,30 +189,31 @@ class App(customtkinter.CTk):
                                                         text="CTkRadioButton Group:")
         self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
 
-        self.mode_select = customtkinter.CTkOptionMenu(master=self.frame_right,
-                                                       values=["option 1", "option 2"],
-                                                       command=self.optionmenu_callback)
-        self.mode_select.grid(row=1, column=2, pady=10, padx=20, sticky="n")
+        self.radio_button_0 = customtkinter.CTkRadioButton(master=self.frame_right,
+                                                           variable=self.radio_var,
+                                                           value=0,
+                                                           text='Mode 0')
+        self.radio_button_0.grid(row=1, column=2, pady=5, padx=20, sticky="n")
+
 
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
-                                                           value=0)
+                                                           value=1,
+                                                           text='Mode 1')
+        self.radio_button_1.grid(row=2, column=2, pady=5, padx=20, sticky="n")
 
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
-                                                           value=1)
-        self.radio_button_2.grid(row=2, column=2, pady=10, padx=20, sticky="n")
+                                                           value=2,
+                                                           text='Mode 2' )
+        self.radio_button_2.grid(row=3, column=2, pady=5, padx=20, sticky="n")
 
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
-                                                           value=2)
-        self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
+                                                           value=3,
+                                                           text='Mode 3')
+        self.radio_button_3.grid(row=4, column=2, pady=5, padx=20, sticky="n")
 
-
-        self.radio_button_4 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
-                                                           value=3)
-        self.radio_button_4.grid(row=4, column=2, pady=10, padx=20, sticky="n")
 
 
 
