@@ -218,15 +218,14 @@ class App(customtkinter.CTk):
 
 
 
-
         # set default values
-        self.radio_button_1.select()
+        self.radio_button_0.select()
         self.switch_2.select()
-        self.slider_r.set(0)
-        self.slider_g.set(0)
-        self.slider_b.set(0)
+        self.slider_r.set(0.5)
+        self.slider_g.set(0.5)
+        self.slider_b.set(0.5)
         self.progressbar.set(0)
-        # self.radio_button_3.configure(state=tkinter.DISABLED)
+
 
     def button_event(self):
         print("Button pressed")
