@@ -185,6 +185,8 @@ class App(customtkinter.CTk):
 
         self.radio_var = tkinter.IntVar(value=0)
 
+
+        # RADIO BUTTONS, MODE SELECT
         self.label_radio_group = customtkinter.CTkLabel(master=self.frame_right,
                                                         text="CTkRadioButton Group:")
         self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
@@ -192,26 +194,26 @@ class App(customtkinter.CTk):
         self.radio_button_0 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
                                                            value=0,
-                                                           text='Mode 0')
+                                                           text='Static')
         self.radio_button_0.grid(row=1, column=2, pady=5, padx=20, sticky="n")
 
 
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
                                                            value=1,
-                                                           text='Mode 1')
+                                                           text='Breath')
         self.radio_button_1.grid(row=2, column=2, pady=5, padx=20, sticky="n")
 
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
                                                            value=2,
-                                                           text='Mode 2' )
+                                                           text='Neon' )
         self.radio_button_2.grid(row=3, column=2, pady=5, padx=20, sticky="n")
 
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
                                                            value=3,
-                                                           text='Mode 3')
+                                                           text='Wave')
         self.radio_button_3.grid(row=4, column=2, pady=5, padx=20, sticky="n")
 
 
@@ -290,6 +292,7 @@ class App(customtkinter.CTk):
         blue = self.return_blue()
         facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         mode = 0
+        mode = self.radio_var.get()
         for i in range(1, 5):
             zone = i
             print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {}'.format(mode, zone, red, green, blue)
