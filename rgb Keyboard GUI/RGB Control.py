@@ -5,9 +5,25 @@ import tkinter
 import tkinter.messagebox
 import subprocess
 import customtkinter
+import pickle
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+
+
+class rgb_profile():
+    def __init__(self, mode, red, green, blue):
+        self.mode = mode
+        self.red = red
+        self.green = green
+        self.blue = blue
+
+rgb_1 = rgb_profile(1, 255, 0, 0)
+
+
+
+
+
 
 class App(customtkinter.CTk):
 
@@ -169,8 +185,8 @@ class App(customtkinter.CTk):
 
         self.slider_button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
-                                                       text="CTkButton 2",
-                                                       command=self.button_event)
+                                                       text="load profile",
+                                                       command=self.load_profile)
         self.slider_button_2.grid(row=7, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
@@ -179,8 +195,8 @@ class App(customtkinter.CTk):
         self.entry.grid(row=8, column=0, columnspan=2, pady=20, padx=20, sticky="we")
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_right,
-                                                text="Save preset",
-                                                command=self.button_event)
+                                                text="Save profile",
+                                                command=self.save_profile)
         self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
         self.radio_var = tkinter.IntVar(value=0)
@@ -226,6 +242,25 @@ class App(customtkinter.CTk):
         self.slider_b.set(0.5)
         self.progressbar.set(0)
 
+
+    
+    # SAVES THE CURRENT OPTIONS TO rgb_profile_<PROFILE NAME>
+    def save_profile(self):
+        profile_name = "rgb_profile_" + self.entry.get()
+        profile = []
+        profile.append(self.radio_var.get())
+        profile.append(self.return_red())
+        profile.append(self.return_green())
+        profile.append(self.return_blue())
+        with open(profile_name, "wb") as file:
+            pickle.dump(profile, file)
+
+    # LOADS THE GIVEN PROFILE FROM rgb_profile_<NUM>
+    def load_profile(self):
+        profile_name = "rgb_profile_" + self.entry.get()
+        with open(profile_name, "rb") as file:
+            profile_obj = pickle.load(file)
+            return profile_obj
 
     def button_event(self):
         print("Button pressed")
@@ -284,7 +319,7 @@ class App(customtkinter.CTk):
         self.label_preview.configure(fg_color=rgb_hex)
         return rgb_hex
 
-#RETRIEVES THE VALUES OF THE R G AND B SLIDERS
+    # RETRIEVES THE VALUES OF THE MODE AND THE R G AND B SLIDERS AND EXECUTES A COMMAND TO SET IT
     def set_colour(self):
         red = self.return_red()
         green = self.return_green()
