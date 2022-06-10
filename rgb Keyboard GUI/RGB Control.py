@@ -6,6 +6,7 @@ import tkinter.messagebox
 import subprocess
 import customtkinter
 import pickle
+from math import *
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -20,7 +21,7 @@ class rgb_profile():
 
 rgb_1 = rgb_profile(1, 255, 0, 0)
 
-
+working_profile = None
 
 
 
@@ -252,6 +253,7 @@ class App(customtkinter.CTk):
         profile.append(self.return_red())
         profile.append(self.return_green())
         profile.append(self.return_blue())
+        print(profile)
         with open(profile_name, "wb") as file:
             pickle.dump(profile, file)
 
@@ -260,7 +262,11 @@ class App(customtkinter.CTk):
         profile_name = "rgb_profile_" + self.entry.get()
         with open(profile_name, "rb") as file:
             profile_obj = pickle.load(file)
-            return profile_obj
+            self.radio_var.set(profile_obj[0])
+            self.slider_r.set(profile_obj[1] / 255)
+            self.slider_g.set(profile_obj[2] / 255)
+            self.slider_b.set(profile_obj[3] / 255)
+            print(profile_obj)
 
     def button_event(self):
         print("Button pressed")
