@@ -69,9 +69,9 @@ class App(customtkinter.CTk):
         self.label_1.grid(row=1, column=0, pady=10, padx=10)
 
         self.button_1 = customtkinter.CTkButton(master=self.frame_left,
-                                                text="TEST SLIDER RED",
+                                                text="RGB7",
                                                 fg_color=("gray75", "gray30"),  # <- custom tuple-color
-                                                command=self.print_red)
+                                                command=self.rgb_init_7)
         self.button_1.grid(row=4, column=0, pady=10, padx=20)
 
         self.button_2 = customtkinter.CTkButton(master=self.frame_left,
@@ -248,7 +248,7 @@ class App(customtkinter.CTk):
 
     rgb_1 = rgb_profile(1, 255, 0, 0)
     print(rgb_1)
-   
+    profile_default = rgb_profile(0, 0, 255, 0)
 
     # SAVES THE CURRENT OPTIONS TO rgb_profile_<PROFILE NAME>
     def save_profile(self):
@@ -334,12 +334,11 @@ class App(customtkinter.CTk):
 
     # RETRIEVES THE VALUES OF THE MODE AND THE R G AND B SLIDERS AND EXECUTES A COMMAND TO SET IT
     def set_colour(self):
-        red = self.return_red()
-        green = self.return_green()
-        blue = self.return_blue()
-        facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
-        mode = 0
         mode = self.mode.get()
+        red = int(self.slider_r.get() * 255 )
+        green = int(self.slider_g.get() * 255 )
+        blue = int(self.slider_b.get() * 255 )
+        facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         for i in range(1, 5):
             zone = i
             print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {}'.format(mode, zone, red, green, blue)
@@ -352,12 +351,6 @@ class App(customtkinter.CTk):
                  '-cG', '{}'.format(green),
                  '-cB', '{}'.format(blue)]
             )
-    def print_red(self):
-        print(str(self.red) + ' button')
-
-    #NOT SURE WHAT THIS DOES, ONLY USING TO SATISFY command KWARG FROM self.mode_select, TAKEN FROM GITHUB EXAMPLE 
-    def optionmenu_callback(choice):
-        print("optionmenu dropdown clicked:", choice)
 
     def change_mode(self):
         if self.switch_2.get() == 1:
