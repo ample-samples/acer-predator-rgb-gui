@@ -7,21 +7,23 @@ import subprocess
 import customtkinter
 import pickle
 from math import *
+from dataclasses import dataclass
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 
-class rgb_profile():
-    def __init__(self, mode, red, green, blue):
-        self.mode = mode
-        self.red = red
-        self.green = green
-        self.blue = blue
 
-rgb_1 = rgb_profile(1, 255, 0, 0)
+@dataclass
+class rgb_profile:
+    mode: int = 0
+    red: float = 0
+    green: float = 0
+    blue: float = 0
 
-working_profile = None
+profile_1 = rgb_profile()
+print(profile_1.mode)
+
 
 
 
@@ -200,7 +202,7 @@ class App(customtkinter.CTk):
                                                 command=self.save_profile)
         self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
-        self.radio_var = tkinter.IntVar(value=0)
+        self.mode = tkinter.IntVar(value=0)
 
 
         # RADIO BUTTONS, MODE SELECT
@@ -209,26 +211,26 @@ class App(customtkinter.CTk):
         self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
 
         self.radio_button_0 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
+                                                           variable=self.mode,
                                                            value=0,
                                                            text='Static')
         self.radio_button_0.grid(row=1, column=2, pady=5, padx=20, sticky="n")
 
 
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
+                                                           variable=self.mode,
                                                            value=1,
                                                            text='Breath')
         self.radio_button_1.grid(row=2, column=2, pady=5, padx=20, sticky="n")
 
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
+                                                           variable=self.mode,
                                                            value=2,
                                                            text='Neon' )
         self.radio_button_2.grid(row=3, column=2, pady=5, padx=20, sticky="n")
 
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.frame_right,
-                                                           variable=self.radio_var,
+                                                           variable=self.mode,
                                                            value=3,
                                                            text='Wave')
         self.radio_button_3.grid(row=4, column=2, pady=5, padx=20, sticky="n")
@@ -244,15 +246,20 @@ class App(customtkinter.CTk):
         self.progressbar.set(0)
 
 
-    
+    rgb_1 = rgb_profile(1, 255, 0, 0)
+    print(rgb_1)
+   
+
     # SAVES THE CURRENT OPTIONS TO rgb_profile_<PROFILE NAME>
     def save_profile(self):
+
         profile_name = "rgb_profile_" + self.entry.get()
-        profile = []
-        profile.append(self.radio_var.get())
-        profile.append(self.return_red())
-        profile.append(self.return_green())
-        profile.append(self.return_blue())
+        profile = rgb_profile(
+            self.mode.get(),
+            self.slider_r.get(),
+            self.slider_g.get(),
+            self.slider_b.get()
+        )
         print(profile)
         with open(profile_name, "wb") as file:
             pickle.dump(profile, file)
@@ -262,10 +269,10 @@ class App(customtkinter.CTk):
         profile_name = "rgb_profile_" + self.entry.get()
         with open(profile_name, "rb") as file:
             profile_obj = pickle.load(file)
-            self.radio_var.set(profile_obj[0])
-            self.slider_r.set(profile_obj[1] / 255)
-            self.slider_g.set(profile_obj[2] / 255)
-            self.slider_b.set(profile_obj[3] / 255)
+            self.mode.set(profile_obj.mode)
+            self.slider_r.set(profile_obj.red)
+            self.slider_g.set(profile_obj.green)
+            self.slider_b.set(profile_obj.blue)
             print(profile_obj)
 
     def button_event(self):
@@ -332,7 +339,7 @@ class App(customtkinter.CTk):
         blue = self.return_blue()
         facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         mode = 0
-        mode = self.radio_var.get()
+        mode = self.mode.get()
         for i in range(1, 5):
             zone = i
             print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {}'.format(mode, zone, red, green, blue)
