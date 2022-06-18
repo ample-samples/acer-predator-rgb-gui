@@ -99,8 +99,6 @@ class App(customtkinter.CTk):
 
         self.button_5.grid(row=6, column=0, pady=10, padx=20)
 
-        self.switch_1 = customtkinter.CTkSwitch(master=self.frame_left)
-        self.switch_1.grid(row=9, column=0, pady=10, padx=20, sticky="w")
 
         self.switch_2 = customtkinter.CTkSwitch(master=self.frame_left,
                                                 text="Dark Mode",
@@ -134,8 +132,6 @@ class App(customtkinter.CTk):
                                                    
         self.label_preview.grid(column=0, row=0, sticky="nwe", padx=15, pady=15)
 
-        self.progressbar = customtkinter.CTkProgressBar(master=self.frame_info)
-        self.progressbar.grid(row=1, column=0, sticky="ew", padx=15, pady=15)
 
         # ============ frame_right ============
         # SLIDER & LABEL RED
@@ -243,7 +239,6 @@ class App(customtkinter.CTk):
         self.slider_r.set(0.5)
         self.slider_g.set(0.5)
         self.slider_b.set(0.5)
-        self.progressbar.set(0)
 
 
     rgb_1 = rgb_profile(1, 255, 0, 0)
