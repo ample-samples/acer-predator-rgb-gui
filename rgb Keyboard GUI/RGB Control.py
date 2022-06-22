@@ -269,6 +269,7 @@ class App(customtkinter.CTk):
             self.slider_g.set(profile_obj.green)
             self.slider_b.set(profile_obj.blue)
             print(profile_obj)
+        self.update_preview()
 
     def button_event(self):
         print("Button pressed")
