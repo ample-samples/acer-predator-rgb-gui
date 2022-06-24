@@ -248,7 +248,7 @@ class App(customtkinter.CTk):
     # SAVES THE CURRENT OPTIONS TO rgb_profile_<PROFILE NAME>
     def save_profile(self):
 
-        profile_name = "rgb_profile_" + self.entry.get()
+        profile_name = "/home/todd/Programs/Acer RGB/rgb_profile_" + self.entry.get()
         profile = rgb_profile(
             self.mode.get(),
             self.slider_r.get(),
@@ -261,7 +261,7 @@ class App(customtkinter.CTk):
 
     # LOADS THE GIVEN PROFILE FROM rgb_profile_<NUM>
     def load_profile(self):
-        profile_name = "rgb_profile_" + self.entry.get()
+        profile_name = "/home/todd/Programs/Acer RGB/rgb_profile_" + self.entry.get()
         with open(profile_name, "rb") as file:
             profile_obj = pickle.load(file)
             self.mode.set(profile_obj.mode)
