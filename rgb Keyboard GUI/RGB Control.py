@@ -81,15 +81,15 @@ class App(customtkinter.CTk):
         self.button_2.grid(row=3, column=0, pady=10, padx=20)
 
         self.button_3 = customtkinter.CTkButton(master=self.frame_left,
-                                                text="RGB2",
-                                                fg_color=("gray75", "gray30"),  # <- custom tuple-color
-                                                command=self.rgb_init_2)
-        self.button_3.grid(row=2, column=0, pady=10, padx=20)
-
-        self.button_4 = customtkinter.CTkButton(master=self.frame_left,
                                                 text="RGB6",
                                                 fg_color=("gray75", "gray30"),  # <- custom tuple-color
                                                 command=self.rgb_init_6)
+        self.button_3.grid(row=2, column=0, pady=10, padx=20)
+
+        self.button_4 = customtkinter.CTkButton(master=self.frame_left,
+                                                text="Autostart",
+                                                fg_color=("gray75", "gray30"),  # <- custom tuple-color
+                                                command=self.rgb_autostart)
         self.button_4.grid(row=5, column=0, pady=10, padx=20)
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_left,
@@ -236,9 +236,9 @@ class App(customtkinter.CTk):
         # set default values
         self.radio_button_0.select()
         self.switch_2.select()
-        self.slider_r.set(0.5)
-        self.slider_g.set(0.5)
-        self.slider_b.set(0.5)
+        self.slider_r.set(0)
+        self.slider_g.set(0)
+        self.slider_b.set(0)
 
 
     rgb_1 = rgb_profile(1, 255, 0, 0)
@@ -259,7 +259,7 @@ class App(customtkinter.CTk):
         with open(profile_name, "wb") as file:
             pickle.dump(profile, file)
 
-    # LOADS THE GIVEN PROFILE FROM rgb_profile_<NUM>
+    # LOADS THE GIVEN PROFILE FROM rgb_profile_<PROFILE NAME>
     def load_profile(self):
         profile_name = "/home/todd/Programs/Acer RGB/rgb_profile_" + self.entry.get()
         with open(profile_name, "rb") as file:
@@ -273,6 +273,9 @@ class App(customtkinter.CTk):
 
     def button_event(self):
         print("Button pressed")
+
+    def rgb_autostart(self):
+        subprocess.run(["rgb_autostart"])
 
     def rgb_init_6(self):
         subprocess.run(["rgb_init.sh_6"])
@@ -359,6 +362,7 @@ class App(customtkinter.CTk):
 
     def start(self):
         self.mainloop()
+
 
 
 if __name__ == "__main__":
