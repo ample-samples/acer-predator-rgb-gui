@@ -64,7 +64,7 @@ class App(customtkinter.CTk):
         self.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
 
         self.label_1 = customtkinter.CTkLabel(master=self.frame_left,
-                                              text="CustomTkinter",
+                                              text="RGB Control",
                                               text_font=("Roboto Medium", -16))  # font name and size in px
         self.label_1.grid(row=1, column=0, pady=10, padx=10)
 
@@ -89,7 +89,7 @@ class App(customtkinter.CTk):
         self.button_4 = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Autostart",
                                                 fg_color=("gray75", "gray30"),  # <- custom tuple-color
-                                                command=self.rgb_autostart)
+                                                command=self.set_autostart)
         self.button_4.grid(row=5, column=0, pady=10, padx=20)
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_left,
@@ -109,7 +109,7 @@ class App(customtkinter.CTk):
 
         # configure grid layout (3x7)
         self.frame_right.rowconfigure((0, 1, 2, 3), weight=1)
-        self.frame_right.rowconfigure(7, weight=10)
+        self.frame_right.rowconfigure(9, weight=10)
         self.frame_right.columnconfigure((0, 1), weight=1)
         self.frame_right.columnconfigure(5, weight=1)
 
@@ -184,26 +184,38 @@ class App(customtkinter.CTk):
 
         self.slider_button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
-                                                       text="load profile",
+                                                       text="Load profile",
                                                        command=self.load_profile)
         self.slider_button_2.grid(row=7, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+
+        self.set_autostart_button = customtkinter.CTkButton(master=self.frame_right,
+                                                       height=25,
+                                                       text="Set autostart",
+                                                       command=self.set_colour)
+        self.set_autostart_button.grid(row=8, column=1, columnspan=1, pady=10, padx=20, sticky="we")
+
+        self.load_autostart_button = customtkinter.CTkButton(master=self.frame_right,
+                                                       height=25,
+                                                       text="Load autostart",
+                                                       command=self.load_profile)
+        self.load_autostart_button.grid(row=8, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
                                             width=120,
                                             placeholder_text="Save as")
-        self.entry.grid(row=8, column=0, columnspan=2, pady=20, padx=20, sticky="we")
+        self.entry.grid(row=10, column=0, columnspan=2, pady=20, padx=20, sticky="we")
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Save profile",
                                                 command=self.save_profile)
-        self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
+        self.button_5.grid(row=10, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
         self.mode = tkinter.IntVar(value=0)
 
 
         # RADIO BUTTONS, MODE SELECT
         self.label_radio_group = customtkinter.CTkLabel(master=self.frame_right,
-                                                        text="CTkRadioButton Group:")
+                                                        text="Mode select:")
         self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
 
         self.radio_button_0 = customtkinter.CTkRadioButton(master=self.frame_right,
@@ -244,6 +256,20 @@ class App(customtkinter.CTk):
     rgb_1 = rgb_profile(1, 255, 0, 0)
     print(rgb_1)
     profile_default = rgb_profile(0, 0, 255, 0)
+    
+    # SAVES THE CURRENT OPTIONS TO THE AUTOSTART PICKLE OBJECT AND THE bin/rgb_autostart.sh PROGRAM
+    def set_autostart(self):
+        template = """ 
+        #!/bin/bash 
+        echo {xi} 
+        """
+        print(template.format(xi = 'bants'))
+        facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
+        return template
+
+    # LOADS THE CURRENTLY SET AUTOSTART PICKLE OBJECT 
+    def load_autostart(self):
+        return None
 
     # SAVES THE CURRENT OPTIONS TO rgb_profile_<PROFILE NAME>
     def save_profile(self):
