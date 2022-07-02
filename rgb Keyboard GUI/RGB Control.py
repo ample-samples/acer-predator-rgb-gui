@@ -191,13 +191,13 @@ class App(customtkinter.CTk):
         self.set_autostart_button = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
                                                        text="Set autostart",
-                                                       command=self.set_colour)
+                                                       command=self.set_autostart)
         self.set_autostart_button.grid(row=8, column=1, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.load_autostart_button = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
                                                        text="Load autostart",
-                                                       command=self.load_profile)
+                                                       command=self.load_autostart)
         self.load_autostart_button.grid(row=8, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
@@ -258,6 +258,7 @@ class App(customtkinter.CTk):
     profile_default = rgb_profile(0, 0, 255, 0)
     
     # SAVES THE CURRENT OPTIONS TO THE AUTOSTART PICKLE OBJECT AND THE bin/rgb_autostart.sh PROGRAM
+    #@todo
     def set_autostart(self):
         template = """ 
         #!/bin/bash 
