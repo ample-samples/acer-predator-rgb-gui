@@ -108,14 +108,13 @@ class App(customtkinter.CTk):
         # ============ frame_right ============
 
         # configure grid layout (3x7)
-        self.frame_right.rowconfigure((0, 1, 2, 3), weight=1)
-        self.frame_right.rowconfigure(9, weight=10)
+        self.frame_right.rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
+        self.frame_right.rowconfigure((10), weight=9)
         self.frame_right.columnconfigure(1, weight=2)
-        self.frame_right.columnconfigure(0, weight=1)
         self.frame_right.columnconfigure(5, weight=1)
 
         self.frame_info = customtkinter.CTkFrame(master=self.frame_right)
-        self.frame_info.grid(row=0, column=1, columnspan=2, rowspan=4, pady=20, padx=20, sticky="nsew")
+        self.frame_info.grid(row=0, column=0, columnspan=3, rowspan=4, pady=20, padx=20, sticky="nsew")
 
         # ============ frame_info ============
 
@@ -126,12 +125,13 @@ class App(customtkinter.CTk):
         self.label_preview = customtkinter.CTkLabel(master=self.frame_info,
                                                    text="Preview" ,
                                                    text_font=('Roboto medium', -16),
-                                                   height=100,
+                                                   height=300,
+                                                   corner_radius=16,
                                                    fg_color='#000000',  # <- custom tuple-color
                                                    justify=tkinter.LEFT,
                                                    bg_color='#000000')
 
-        self.label_preview.grid(column=0, row=0, sticky="nwe", padx=15, pady=15)
+        self.label_preview.grid(column=0, row=0, columnspan=6, rowspan=4, sticky="nwe", padx=15, pady=15)
 
 
         # ============ frame_right ============
@@ -141,7 +141,9 @@ class App(customtkinter.CTk):
                                                 to=1,
                                                 number_of_steps=255,
                                                 command=self.update_red,
-                                                progress_color='#FF0000')
+                                                progress_color='#FF0000',
+                                                button_color='#FF0000',
+                                                button_hover_color='#FFAAAA')
         self.slider_r.grid(row=4, column=1, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.label_red_value = customtkinter.CTkLabel(master=self.frame_right,
@@ -162,7 +164,9 @@ class App(customtkinter.CTk):
                                                 to=1,
                                                 number_of_steps=255,
                                                 command=self.update_green,
-                                                progress_color='#00FF00')
+                                                progress_color='#00FF00',
+                                                button_color='#00FF00',
+                                                button_hover_color='#AAFFAA')
         self.slider_g.grid(row=5, column=1, columnspan=1, pady=10, padx=20, sticky="we")
 
 
@@ -175,7 +179,7 @@ class App(customtkinter.CTk):
                                               text='Green',
                                               text_font=("Roboto Medium", -16))  # font name and size in px
 
-        self.label_g.grid(row=5, column=0, columnspan=1, pady=10, padx=0)
+        self.label_g.grid(row=5, column=0, pady=10, padx=0)
 
 # SLIDER & LABEL BLUE
         self.slider_b = customtkinter.CTkSlider(master=self.frame_right,
@@ -183,7 +187,9 @@ class App(customtkinter.CTk):
                                                 to=1,
                                                 number_of_steps=255,
                                                 command=self.update_blue,
-                                                progress_color='#0000FF')
+                                                progress_color='#0000FF',
+                                                button_color='#0000FF',
+                                                button_hover_color='#AAAAFF')
         self.slider_b.grid(row=6, column=1, columnspan=1, pady=10, padx=20, sticky="we")
 
 
@@ -196,7 +202,7 @@ class App(customtkinter.CTk):
                                               text='Blue',
                                               text_font=("Roboto Medium", -16))  # font name and size in px
 
-        self.label_b.grid(row=6, column=0, columnspan=1, pady=10, padx=0)
+        self.label_b.grid(row=6, column=0, pady=10, padx=0)
 
 
 
@@ -205,35 +211,35 @@ class App(customtkinter.CTk):
                                                        height=25,
                                                        text="Set colour",
                                                        command=self.set_colour)
-        self.button_set_colour.grid(row=7, column=1, columnspan=1, pady=10, padx=20, sticky="we")
-
-        self.slider_button_2 = customtkinter.CTkButton(master=self.frame_right,
-                                                       height=25,
-                                                       text="Load profile",
-                                                       command=self.load_profile)
-        self.slider_button_2.grid(row=7, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+        self.button_set_colour.grid(row=7, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.set_autostart_button = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
                                                        text="Set autostart",
                                                        command=self.set_autostart)
-        self.set_autostart_button.grid(row=8, column=1, columnspan=1, pady=10, padx=20, sticky="we")
+        # self.set_autostart_button.grid(row=8, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.load_autostart_button = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
                                                        text="Load autostart",
                                                        command=self.load_autostart)
-        self.load_autostart_button.grid(row=8, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+        # self.load_autostart_button.grid(row=9, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
                                             width=120,
                                             placeholder_text="Save as")
-        self.entry.grid(row=10, column=0, columnspan=2, pady=20, padx=20, sticky="we")
+        self.entry.grid(row=11, column=0, columnspan=2, pady=20, padx=20, sticky="we")
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Save profile",
                                                 command=self.save_profile)
-        self.button_5.grid(row=10, column=2, columnspan=1, pady=20, padx=20, sticky="we")
+        self.button_5.grid(row=11, column=2, columnspan=1, pady=20, padx=20, sticky="we")
+
+        self.slider_button_2 = customtkinter.CTkButton(master=self.frame_right,
+                                                       height=25,
+                                                       text="Load profile",
+                                                       command=self.load_profile)
+        self.slider_button_2.grid(row=12, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.mode = tkinter.IntVar(value=0)
 
@@ -313,6 +319,7 @@ blue=235
 
     # SAVES THE CURRENT OPTIONS TO THE AUTOSTART PICKLE OBJECT AND THE bin/rgb_autostart.sh PROGRAM
     #@todo
+    # NOTE: SHOULD BE SAVED IN A WAY THAT CAN BE EASILY RETIREVED AND r, g AND b VARIABLES USED TO UPDATE SLIDERS AND THE COLOR PREVIEW
     def set_autostart(self):
         template = """
         #!/bin/bash
@@ -321,6 +328,10 @@ blue=235
         print(template.format('THIS JUST A TEST!!!'))
         facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         return template
+
+    # RETREIVES THE CURRENTLY STORED AUTOSTART PROFILE AND SETS THE SLIDERS ACCORDINGLY
+    def retreive_autostart(self):
+        return None
 
     # LOADS THE CURRENTLY SET AUTOSTART PICKLE OBJECT 
     def load_autostart(self):
