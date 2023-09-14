@@ -65,7 +65,7 @@ class App(customtkinter.CTk):
 
         self.label_1 = customtkinter.CTkLabel(master=self.frame_left,
                                               text="RGB Control",
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              font=("Roboto Medium", -16))  # font name and size in px
         self.label_1.grid(row=1, column=0, pady=10, padx=10)
 
         self.button_1 = customtkinter.CTkButton(master=self.frame_left,
@@ -124,7 +124,7 @@ class App(customtkinter.CTk):
 
         self.label_preview = customtkinter.CTkLabel(master=self.frame_info,
                                                    text="Preview" ,
-                                                   text_font=('Roboto medium', -16),
+                                                   font=('Roboto medium', -16),
                                                    height=300,
                                                    corner_radius=16,
                                                    fg_color='#000000',  # <- custom tuple-color
@@ -148,12 +148,12 @@ class App(customtkinter.CTk):
 
         self.label_red_value = customtkinter.CTkLabel(master=self.frame_right,
                                               text=self.slider_r.get(),
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              font=("Roboto Medium", -16))  # font name and size in px
         self.label_red_value.grid(row=4, column=2, columnspan=1, pady=10, padx=0)
 
         self.label_r= customtkinter.CTkLabel(master=self.frame_right,
                                               text='Red',
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              font=("Roboto Medium", -16))  # font name and size in px
 
         self.label_r.grid(row=4, column=0, columnspan=1, pady=10, padx=0)
 
@@ -172,12 +172,12 @@ class App(customtkinter.CTk):
 
         self.label_green_value = customtkinter.CTkLabel(master=self.frame_right,
                                               text=self.slider_g.get(),
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              font=("Roboto Medium", -16))  # font name and size in px
         self.label_green_value.grid(row=5, column=2, columnspan=1, pady=10, padx=0)
 
         self.label_g= customtkinter.CTkLabel(master=self.frame_right,
                                               text='Green',
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              font=("Roboto Medium", -16))  # font name and size in px
 
         self.label_g.grid(row=5, column=0, pady=10, padx=0)
 
@@ -195,12 +195,12 @@ class App(customtkinter.CTk):
 
         self.label_blue_value = customtkinter.CTkLabel(master=self.frame_right,
                                               text=self.slider_b.get(),
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              font=("Roboto Medium", -16))  # font name and size in px
         self.label_blue_value.grid(row=6, column=2, columnspan=1, pady=10, padx=0)
 
         self.label_b= customtkinter.CTkLabel(master=self.frame_right,
                                               text='Blue',
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              font=("Roboto Medium", -16))  # font name and size in px
 
         self.label_b.grid(row=6, column=0, pady=10, padx=0)
 
