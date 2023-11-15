@@ -1,7 +1,7 @@
 # Acer RGB GUI for facer.py
 ## A GUI to interact with the acer-predator-turbo-and-rgb-keyboard-linux-module Acer Predator RGB kernel module from JafarAkhondali
 
-### A video of the keyboard lights in action
+### The keyboard lights in action
 ![](https://raw.githubusercontent.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module/main/keyboard.webp)
 
 ### A look at the front-end
