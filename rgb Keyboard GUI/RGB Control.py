@@ -31,7 +31,7 @@ print(profile_1.mode)
 class App(customtkinter.CTk):
 
     WIDTH = 780
-    HEIGHT = 520
+    HEIGHT = 600
 
     def __init__(self):
         super().__init__()
@@ -302,10 +302,10 @@ green=30
 blue=235
 
 
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 1 -cR {red} -cG {green} -cB {blue}
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 2 -cR {red} -cG {green} -cB {blue}
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 3 -cR {red} -cG {green} -cB {blue}
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -cR {red} -cG {green} -cB {blue}
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 1 -cR {red} -cG {green} -cB {blue}
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 2 -cR {red} -cG {green} -cB {blue}
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 3 -cR {red} -cG {green} -cB {blue}
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -cR {red} -cG {green} -cB {blue}
         """
 
 
@@ -326,7 +326,7 @@ blue=235
         echo {}
         """
         print(template.format('THIS JUST A TEST!!!'))
-        facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
+        facer_path = '../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         return template
 
     # RETREIVES THE CURRENTLY STORED AUTOSTART PROFILE AND SETS THE SLIDERS ACCORDINGLY
@@ -340,7 +340,7 @@ blue=235
     # SAVES THE CURRENT OPTIONS TO rgb_profile_<PROFILE NAME>
     def save_profile(self):
 
-        profile_name = "/home/todd/Programs/Acer RGB/rgb_profile_" + self.entry.get()
+        profile_name = "rgb_profile_" + self.entry.get()
         profile = rgb_profile(
             self.mode.get(),
             self.slider_r.get(),
@@ -353,7 +353,7 @@ blue=235
 
     # LOADS THE GIVEN PROFILE FROM rgb_profile_<PROFILE NAME>
     def load_profile(self):
-        profile_name = "/home/todd/Programs/Acer RGB/rgb_profile_" + self.entry.get()
+        profile_name = "rgb_profile_" + self.entry.get()
         with open(profile_name, "rb") as file:
             profile_obj = pickle.load(file)
             self.mode.set(profile_obj.mode)
@@ -367,25 +367,25 @@ blue=235
         print("Button pressed")
 
     def rgb_autostart(self):
-        subprocess.run(["rgb_autostart"])
+        subprocess.run(["../rgb scripts/rgb_autostart"])
 
     def rgb_init_6(self):
-        subprocess.run(["rgb_init.sh_6"])
+        subprocess.run(["../rgb scripts/rgb_init.sh_6"])
 
     def rgb_init_7(self):
-        subprocess.run(["rgb_init.sh_7"])
+        subprocess.run(["../rgb scripts/rgb_init.sh_7"])
 
     def rgb_init_8(self):
-        subprocess.run(["rgb_init.sh_9"])
+        subprocess.run(["../rgb scripts/rgb_init.sh_9"])
 
     def rgb_init_9(self):
-        subprocess.run(["rgb_init.sh_9"])
+        subprocess.run(["../rgb scripts/rgb_init.sh_9"])
 
     def rgb_init_3(self):
-        subprocess.run(["rgb_init.sh_3"])
+        subprocess.run(["../rgb scripts/rgb_init.sh_3"])
 
     def rgb_init_2(self):
-        subprocess.run(["rgb_init.sh_2"])
+        subprocess.run(["../rgb scrigts/rgb_init.sh_2"])
 
     def update_red(self, slider):
         red = slider
@@ -429,7 +429,7 @@ blue=235
         red = int(self.slider_r.get() * 255)
         green = int(self.slider_g.get() * 255)
         blue = int(self.slider_b.get() * 255)
-        facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
+        facer_path = '../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         for i in range(1, 5):
             zone = i
             print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {}'.format(mode, zone, red, green, blue)
