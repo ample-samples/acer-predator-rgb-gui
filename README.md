@@ -29,7 +29,11 @@ sudo ./install_service.sh
 ```
 
 ### Run
-Open the "rgb Keyboard GUI" folder and run "RGB Control.py". To activate the custom profile, run 
+To run the tool, simply run the python file "control.py" in the base directory.
+```
+cd /path/to/cloned/repo # cd ../.. if running directly after installation
+./control.py
+```
 
 ## Backend
 The backend for this application can be found here: https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module
