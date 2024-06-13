@@ -31,7 +31,7 @@ print(profile_1.mode)
 class App(customtkinter.CTk):
 
     WIDTH = 780
-    HEIGHT = 600
+    HEIGHT = 650
 
     def __init__(self):
         super().__init__()
@@ -109,7 +109,7 @@ class App(customtkinter.CTk):
 
         # configure grid layout (3x7)
         self.frame_right.rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
-        self.frame_right.rowconfigure((10), weight=9)
+        self.frame_right.rowconfigure((11), weight=9)
         self.frame_right.columnconfigure(1, weight=2)
         self.frame_right.columnconfigure(5, weight=1)
 
@@ -194,15 +194,39 @@ class App(customtkinter.CTk):
 
 
         self.label_blue_value = customtkinter.CTkLabel(master=self.frame_right,
-                                              text=self.slider_b.get(),
-                                              font=("Roboto Medium", -16))  # font name and size in px
+                                                       text=self.slider_b.get(),
+                                                       font=("Roboto Medium", -16))  # font name and size in px
         self.label_blue_value.grid(row=6, column=2, columnspan=1, pady=10, padx=0)
 
         self.label_b= customtkinter.CTkLabel(master=self.frame_right,
-                                              text='Blue',
-                                              font=("Roboto Medium", -16))  # font name and size in px
+                                             text='Blue',
+                                             font=("Roboto Medium", -16))  # font name and size in px
 
         self.label_b.grid(row=6, column=0, pady=10, padx=0)
+
+# SLIDER & LABEL SPEED
+        self.slider_s = customtkinter.CTkSlider(master=self.frame_right,
+                                                from_=0,
+                                                to=1,
+                                                number_of_steps=255,
+                                                command=self.update_speed,
+                                                progress_color='#AAAAAA',
+                                                button_color='#AAAAAA',
+                                                button_hover_color='#BBBBBB')
+        self.slider_s.grid(row=7, column=1, columnspan=1, pady=10, padx=10, sticky="we")
+
+
+        self.label_speed_value = customtkinter.CTkLabel(master=self.frame_right,
+                                                        text=self.slider_s.get(),
+                                                        font=("Roboto Medium", -16)) # font name and size in px
+
+        self.label_speed_value.grid(row=7, column=2, columnspan=1, pady=10, padx=0)
+
+        self.label_s = customtkinter.CTkLabel(master=self.frame_right,
+                                              text='Speed',
+                                              font=("Roboto Medium", -16)) # font name and size in px
+
+        self.label_s.grid(row=7, column=0, pady=10, padx=0)
 
 
 
@@ -211,7 +235,7 @@ class App(customtkinter.CTk):
                                                        height=25,
                                                        text="Set colour",
                                                        command=self.set_colour)
-        self.button_set_colour.grid(row=7, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+        self.button_set_colour.grid(row=8, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.set_autostart_button = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
@@ -228,18 +252,18 @@ class App(customtkinter.CTk):
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
                                             width=120,
                                             placeholder_text="Save as")
-        self.entry.grid(row=11, column=0, columnspan=2, pady=20, padx=20, sticky="we")
+        self.entry.grid(row=12, column=0, columnspan=2, pady=20, padx=20, sticky="we")
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Save profile",
                                                 command=self.save_profile)
-        self.button_5.grid(row=11, column=2, columnspan=1, pady=20, padx=20, sticky="we")
+        self.button_5.grid(row=12, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
         self.slider_button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
                                                        text="Load profile",
                                                        command=self.load_profile)
-        self.slider_button_2.grid(row=12, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+        self.slider_button_2.grid(row=13, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.mode = tkinter.IntVar(value=0)
 
@@ -288,6 +312,9 @@ class App(customtkinter.CTk):
 
         self.slider_b.set(0)
         self.label_blue_value.configure(text=0)
+
+        self.slider_s.set(0)
+        self.label_speed_value.configure(text=0)
 
         self.profile_template = """
 #!/bin/bash
@@ -402,6 +429,11 @@ acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -c
         self.label_blue_value.configure(text=str(int(blue*255)))
         self.update_preview()
 
+    def update_speed(self, slider):
+        speed = slider
+        self.label_speed_value.configure(text=str(int(speed*9)))
+        self.update_preview()
+
     def return_red(self):
         red = int(self.slider_r.get() * 255)
         return red
@@ -429,10 +461,11 @@ acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -c
         red = int(self.slider_r.get() * 255)
         green = int(self.slider_g.get() * 255)
         blue = int(self.slider_b.get() * 255)
+        speed = int(self.slider_s.get() * 9)
         facer_path = 'acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         for i in range(1, 5):
             zone = i
-            print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {}'.format(mode, zone, red, green, blue)
+            print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {} -s {}'.format(mode, zone, red, green, blue, speed)
                  )
             subprocess.run(
                 [facer_path,
@@ -440,7 +473,8 @@ acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -c
                  '-z', '{}'.format(zone),
                  '-cR', '{}'.format(red),
                  '-cG', '{}'.format(green),
-                 '-cB', '{}'.format(blue)]
+                 '-cB', '{}'.format(blue),
+                 '-s', '{}'.format(speed)]
             )
 
     def change_mode(self):
