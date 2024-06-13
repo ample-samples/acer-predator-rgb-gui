@@ -367,25 +367,25 @@ acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -c
         print("Button pressed")
 
     def rgb_autostart(self):
-        subprocess.run(["rgb scripts/rgb_autostart"])
+        subprocess.run(["profiles/rgb_autostart"])
 
     def rgb_init_6(self):
-        subprocess.run(["rgb scripts/rgb_init.sh_6"])
+        subprocess.run(["profiles/rgb_init.sh_6"])
 
     def rgb_init_7(self):
-        subprocess.run(["rgb scripts/rgb_init.sh_7"])
+        subprocess.run(["profiles/rgb_init.sh_7"])
 
     def rgb_init_8(self):
-        subprocess.run(["rgb scripts/rgb_init.sh_9"])
+        subprocess.run(["profiles/rgb_init.sh_9"])
 
     def rgb_init_9(self):
-        subprocess.run(["rgb scripts/rgb_init.sh_9"])
+        subprocess.run(["profiles/rgb_init.sh_9"])
 
     def rgb_init_3(self):
-        subprocess.run(["rgb scripts/rgb_init.sh_3"])
+        subprocess.run(["profiles/rgb_init.sh_3"])
 
     def rgb_init_2(self):
-        subprocess.run(["rgb scrigts/rgb_init.sh_2"])
+        subprocess.run(["profiles/rgb_init.sh_2"])
 
     def update_red(self, slider):
         red = slider
