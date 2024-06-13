@@ -22,10 +22,8 @@ yay -S customtkinter
 
 ### Install
 ```
-git clone https://github.com/ample-samples/acer-predator-rgb-gui
-cd acer-predator-rgb-gui
-git clone https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module
-cd acer-predator-turbo-and-rgb-keyboard-linux-module
+git clone https://github.com/DJPretzel-bit64/acer-predator-rgb-gui --recursive
+cd acer-predator-rgb-gui/acer-predator-turbo-and-rgb-keyboard-linux-module
 chmod +x ./.sh
 sudo ./install.sh
 ```
