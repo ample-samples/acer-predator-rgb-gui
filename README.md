@@ -25,7 +25,7 @@ yay -S customtkinter
 git clone https://github.com/DJPretzel-bit64/acer-predator-rgb-gui --recursive
 cd acer-predator-rgb-gui/acer-predator-turbo-and-rgb-keyboard-linux-module
 chmod +x ./*.sh
-sudo ./install.sh
+sudo ./install_service.sh
 ```
 
 ### Run
