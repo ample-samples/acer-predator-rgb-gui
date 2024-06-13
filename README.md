@@ -12,16 +12,11 @@ This application was created to help users control their keyboard lights in a us
 ## Installation
 
 ### Dependencies
-- Python
+The GUI requires Python, Tkinter and CustomTkinter to run.
+
+#### Arch Installation
 ```
-sudo pacman -S python
-```
-- Tkinter
-```
-sudo pacman -S tk
-```
-- CustomTkinter
-```
+sudo pacman -S python tk
 yay -S customtkinter
 ```
 
@@ -30,7 +25,7 @@ yay -S customtkinter
 git clone https://github.com/ample-samples/acer-predator-rgb-gui
 cd acer-predator-rgb-gui
 git clone https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module
-cd "acer-predator-turbo-and-rgb-keyboard-linux-module"
+cd acer-predator-turbo-and-rgb-keyboard-linux-module
 chmod +x ./.sh
 sudo ./install.sh
 ```
