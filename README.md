@@ -14,7 +14,7 @@ This application was created to help users control their keyboard lights in a us
 ### Dependencies
 The GUI requires Python, Tkinter and CustomTkinter to run.
 
-#### Arch Installation
+#### Arch
 ```
 sudo pacman -S python tk
 yay -S customtkinter
