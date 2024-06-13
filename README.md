@@ -9,5 +9,34 @@
 
 This application was created to help users control their keyboard lights in a user-friendly way. This is a Linux only application designed for users of Arch Linux. I created this to solve the problem I had which was when I had just started using Linux and found that there were no programs to control my laptop's lights in an easy way.
 
+## Installation
+
+### Dependencies
+- Python
+```
+sudo pacman -S python
+```
+- Tkinter
+```
+sudo pacman -S tk
+```
+- CustomTkinter
+```
+yay -S customtkinter
+```
+
+### Install
+```
+git clone https://github.com/ample-samples/acer-predator-rgb-gui
+cd acer-predator-rgb-gui
+git clone https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module
+cd "acer-predator-turbo-and-rgb-keyboard-linux-module"
+chmod +x ./.sh
+sudo ./install.sh
+```
+
+### Run
+Open the "rgb Keyboard GUI" folder and run "RGB Control.py". To activate the custom profile, run 
+
 ## Backend
 The backend for this application can be found here: https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module
