@@ -10,13 +10,13 @@ green=$((RANDOM % 256))
 blue=$((RANDOM % 256))
 
 
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 1 -cR "$red" -cG "$green" -cB "$blue"
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 2 -cR "$red" -cG "$green" -cB "$blue"
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 3 -cR "$red" -cG "$green" -cB "$blue"
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 4 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 1 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 2 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 3 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 4 -cR "$red" -cG "$green" -cB "$blue"
 
 
 RGB=$red:$green:$blue
 
-echo $RGB > /home/todd/Programs/Acer\ RGB/RGB
-echo $RGB >> /home/todd/Programs/Acer\ RGB/RGB_history 
+echo $RGB > ../RGB
+echo $RGB >> ../RGB_history 

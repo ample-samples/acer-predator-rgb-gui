@@ -10,9 +10,9 @@ green=117
 blue=77
 
 
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 1 -cR "$red" -cG "$green" -cB "$blue"
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 2 -cR "$red" -cG "$green" -cB "$blue"
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 3 -cR "$red" -cG "$green" -cB "$blue"
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 4 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 1 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 2 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 3 -cR "$red" -cG "$green" -cB "$blue"
+../acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m "$mode" -z 4 -cR "$red" -cG "$green" -cB "$blue"
 
 
