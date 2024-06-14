@@ -24,6 +24,9 @@ class rgb_profile:
 profile_1 = rgb_profile()
 print(profile_1.mode)
 
+def clamp(num, min_n, max_n):
+    return max(min(num, max_n), min_n)
+
 
 
 
@@ -31,7 +34,7 @@ print(profile_1.mode)
 class App(customtkinter.CTk):
 
     WIDTH = 780
-    HEIGHT = 520
+    HEIGHT = 700
 
     def __init__(self):
         super().__init__()
@@ -109,7 +112,7 @@ class App(customtkinter.CTk):
 
         # configure grid layout (3x7)
         self.frame_right.rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
-        self.frame_right.rowconfigure((10), weight=9)
+        self.frame_right.rowconfigure((11), weight=9)
         self.frame_right.columnconfigure(1, weight=2)
         self.frame_right.columnconfigure(5, weight=1)
 
@@ -146,9 +149,9 @@ class App(customtkinter.CTk):
                                                 button_hover_color='#FFAAAA')
         self.slider_r.grid(row=4, column=1, columnspan=1, pady=10, padx=20, sticky="we")
 
-        self.label_red_value = customtkinter.CTkLabel(master=self.frame_right,
-                                              text=self.slider_r.get(),
-                                              font=("Roboto Medium", -16))  # font name and size in px
+        self.label_red_value = customtkinter.CTkEntry(master=self.frame_right,
+                                                      font=("Roboto Medium", -16))  # font name and size in px
+        self.label_red_value.bind("<KeyRelease>", self.update_slider_r)
         self.label_red_value.grid(row=4, column=2, columnspan=1, pady=10, padx=0)
 
         self.label_r= customtkinter.CTkLabel(master=self.frame_right,
@@ -170,9 +173,9 @@ class App(customtkinter.CTk):
         self.slider_g.grid(row=5, column=1, columnspan=1, pady=10, padx=20, sticky="we")
 
 
-        self.label_green_value = customtkinter.CTkLabel(master=self.frame_right,
-                                              text=self.slider_g.get(),
+        self.label_green_value = customtkinter.CTkEntry(master=self.frame_right,
                                               font=("Roboto Medium", -16))  # font name and size in px
+        self.label_green_value.bind("<KeyRelease>", self.update_slider_g)
         self.label_green_value.grid(row=5, column=2, columnspan=1, pady=10, padx=0)
 
         self.label_g= customtkinter.CTkLabel(master=self.frame_right,
@@ -193,16 +196,39 @@ class App(customtkinter.CTk):
         self.slider_b.grid(row=6, column=1, columnspan=1, pady=10, padx=20, sticky="we")
 
 
-        self.label_blue_value = customtkinter.CTkLabel(master=self.frame_right,
-                                              text=self.slider_b.get(),
-                                              font=("Roboto Medium", -16))  # font name and size in px
+        self.label_blue_value = customtkinter.CTkEntry(master=self.frame_right,
+                                                       font=("Roboto Medium", -16))  # font name and size in px
+        self.label_blue_value.bind("<KeyRelease>", self.update_slider_b)
         self.label_blue_value.grid(row=6, column=2, columnspan=1, pady=10, padx=0)
 
         self.label_b= customtkinter.CTkLabel(master=self.frame_right,
-                                              text='Blue',
-                                              font=("Roboto Medium", -16))  # font name and size in px
+                                             text='Blue',
+                                             font=("Roboto Medium", -16))  # font name and size in px
 
         self.label_b.grid(row=6, column=0, pady=10, padx=0)
+
+# SLIDER & LABEL SPEED
+        self.slider_s = customtkinter.CTkSlider(master=self.frame_right,
+                                                from_=0,
+                                                to=1,
+                                                number_of_steps=255,
+                                                command=self.update_speed,
+                                                progress_color='#AAAAAA',
+                                                button_color='#AAAAAA',
+                                                button_hover_color='#BBBBBB')
+        self.slider_s.grid(row=7, column=1, columnspan=1, pady=10, padx=10, sticky="we")
+
+
+        self.label_speed_value = customtkinter.CTkEntry(master=self.frame_right,
+                                                        font=("Roboto Medium", -16)) # font name and size in px
+        self.label_speed_value.bind("<KeyRelease>", self.update_slider_s)
+        self.label_speed_value.grid(row=7, column=2, columnspan=1, pady=10, padx=0)
+
+        self.label_s = customtkinter.CTkLabel(master=self.frame_right,
+                                              text='Speed',
+                                              font=("Roboto Medium", -16)) # font name and size in px
+
+        self.label_s.grid(row=7, column=0, pady=10, padx=0)
 
 
 
@@ -211,7 +237,7 @@ class App(customtkinter.CTk):
                                                        height=25,
                                                        text="Set colour",
                                                        command=self.set_colour)
-        self.button_set_colour.grid(row=7, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+        self.button_set_colour.grid(row=8, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.set_autostart_button = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
@@ -228,18 +254,18 @@ class App(customtkinter.CTk):
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
                                             width=120,
                                             placeholder_text="Save as")
-        self.entry.grid(row=11, column=0, columnspan=2, pady=20, padx=20, sticky="we")
+        self.entry.grid(row=12, column=0, columnspan=2, pady=20, padx=20, sticky="we")
 
         self.button_5 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Save profile",
                                                 command=self.save_profile)
-        self.button_5.grid(row=11, column=2, columnspan=1, pady=20, padx=20, sticky="we")
+        self.button_5.grid(row=12, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
         self.slider_button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                        height=25,
                                                        text="Load profile",
                                                        command=self.load_profile)
-        self.slider_button_2.grid(row=12, column=2, columnspan=1, pady=10, padx=20, sticky="we")
+        self.slider_button_2.grid(row=13, column=2, columnspan=1, pady=10, padx=20, sticky="we")
 
         self.mode = tkinter.IntVar(value=0)
 
@@ -281,13 +307,20 @@ class App(customtkinter.CTk):
         self.switch_2.select()
 
         self.slider_r.set(0)
-        self.label_red_value.configure(text=0)
+        self.label_red_value.delete(0, 'end')
+        self.label_red_value.insert(0, '0')
 
         self.slider_g.set(0)
-        self.label_green_value.configure(text=0)
+        self.label_green_value.delete(0, 'end')
+        self.label_green_value.insert(0, '0')
 
         self.slider_b.set(0)
-        self.label_blue_value.configure(text=0)
+        self.label_blue_value.delete(0, 'end')
+        self.label_blue_value.insert(0, '0')
+
+        self.slider_s.set(0)
+        self.label_speed_value.delete(0, 'end')
+        self.label_speed_value.insert(0, '0')
 
         self.profile_template = """
 #!/bin/bash
@@ -302,10 +335,10 @@ green=30
 blue=235
 
 
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 1 -cR {red} -cG {green} -cB {blue}
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 2 -cR {red} -cG {green} -cB {blue}
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 3 -cR {red} -cG {green} -cB {blue}
-/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -cR {red} -cG {green} -cB {blue}
+acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 1 -cR {red} -cG {green} -cB {blue}
+acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 2 -cR {red} -cG {green} -cB {blue}
+acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 3 -cR {red} -cG {green} -cB {blue}
+acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py -m {mode} -z 4 -cR {red} -cG {green} -cB {blue}
         """
 
 
@@ -326,7 +359,7 @@ blue=235
         echo {}
         """
         print(template.format('THIS JUST A TEST!!!'))
-        facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
+        facer_path = 'acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         return template
 
     # RETREIVES THE CURRENTLY STORED AUTOSTART PROFILE AND SETS THE SLIDERS ACCORDINGLY
@@ -340,7 +373,7 @@ blue=235
     # SAVES THE CURRENT OPTIONS TO rgb_profile_<PROFILE NAME>
     def save_profile(self):
 
-        profile_name = "/home/todd/Programs/Acer RGB/rgb_profile_" + self.entry.get()
+        profile_name = "profiles/rgb_profile_" + self.entry.get()
         profile = rgb_profile(
             self.mode.get(),
             self.slider_r.get(),
@@ -353,7 +386,7 @@ blue=235
 
     # LOADS THE GIVEN PROFILE FROM rgb_profile_<PROFILE NAME>
     def load_profile(self):
-        profile_name = "/home/todd/Programs/Acer RGB/rgb_profile_" + self.entry.get()
+        profile_name = "profiles/rgb_profile_" + self.entry.get()
         with open(profile_name, "rb") as file:
             profile_obj = pickle.load(file)
             self.mode.set(profile_obj.mode)
@@ -367,40 +400,77 @@ blue=235
         print("Button pressed")
 
     def rgb_autostart(self):
-        subprocess.run(["rgb_autostart"])
+        subprocess.run(["profiles/rgb_autostart"])
 
     def rgb_init_6(self):
-        subprocess.run(["rgb_init.sh_6"])
+        subprocess.run(["profiles/rgb_init.sh_6"])
 
     def rgb_init_7(self):
-        subprocess.run(["rgb_init.sh_7"])
+        subprocess.run(["profiles/rgb_init.sh_7"])
 
     def rgb_init_8(self):
-        subprocess.run(["rgb_init.sh_9"])
+        subprocess.run(["profiles/rgb_init.sh_9"])
 
     def rgb_init_9(self):
-        subprocess.run(["rgb_init.sh_9"])
+        subprocess.run(["profiles/rgb_init.sh_9"])
 
     def rgb_init_3(self):
-        subprocess.run(["rgb_init.sh_3"])
+        subprocess.run(["profiles/rgb_init.sh_3"])
 
     def rgb_init_2(self):
-        subprocess.run(["rgb_init.sh_2"])
+        subprocess.run(["profiles/rgb_init.sh_2"])
 
     def update_red(self, slider):
         red = slider
-        self.label_red_value.configure(text=str(int(red*255)))
+        self.label_red_value.delete(0, 'end')
+        self.label_red_value.insert(0, str(int(red*255)))
         self.update_preview()
+
+    def update_slider_r(self, event):
+        try:
+            red = int(self.label_red_value.get())
+            self.slider_r.set(red / 255.)
+        except:
+            pass
 
     def update_green(self, slider):
         green = slider
-        self.label_green_value.configure(text=str(int(green*255)))
+        self.label_green_value.delete(0, 'end')
+        self.label_green_value.insert(0, str(int(green*255)))
         self.update_preview()
+
+    def update_slider_g(self, event):
+        try:
+            green = int(self.label_green_value.get())
+            self.slider_g.set(green / 255.)
+        except:
+            pass
 
     def update_blue(self, slider):
         blue = slider
-        self.label_blue_value.configure(text=str(int(blue*255)))
+        self.label_blue_value.delete(0, 'end')
+        self.label_blue_value.insert(0, str(int(blue*255)))
         self.update_preview()
+
+    def update_slider_b(self, event):
+        try:
+            blue = int(self.label_blue_value.get())
+            self.slider_b.set(blue / 255.)
+        except:
+            pass
+
+    def update_speed(self, slider):
+        speed = slider
+        self.label_speed_value.delete(0, 'end')
+        self.label_speed_value.insert(0, str(int(speed*9)))
+        self.update_preview()
+
+    def update_slider_s(self, event):
+        try:
+            speed = int(self.label_speed_value.get())
+            self.slider_s.set(speed / 255.)
+        except:
+            pass
 
     def return_red(self):
         red = int(self.slider_r.get() * 255)
@@ -426,13 +496,14 @@ blue=235
     # RETRIEVES THE VALUES OF THE MODE AND THE R G AND B SLIDERS AND EXECUTES A COMMAND TO SET IT
     def set_colour(self):
         mode = self.mode.get()
-        red = int(self.slider_r.get() * 255)
-        green = int(self.slider_g.get() * 255)
-        blue = int(self.slider_b.get() * 255)
-        facer_path = '/home/todd/Programs/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
+        red = str(clamp(int(self.label_red_value.get()), 0, 255))
+        green = str(clamp(int(self.label_green_value.get()), 0, 255))
+        blue = str(clamp(int(self.label_blue_value.get()), 0, 255))
+        speed = str(clamp(int(self.label_speed_value.get()), 0, 9))
+        facer_path = 'acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
         for i in range(1, 5):
             zone = i
-            print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {}'.format(mode, zone, red, green, blue)
+            print(facer_path +' -m {} -z {} -cR {} -cG {} -cB {} -s {}'.format(mode, zone, red, green, blue, speed)
                  )
             subprocess.run(
                 [facer_path,
@@ -440,7 +511,8 @@ blue=235
                  '-z', '{}'.format(zone),
                  '-cR', '{}'.format(red),
                  '-cG', '{}'.format(green),
-                 '-cB', '{}'.format(blue)]
+                 '-cB', '{}'.format(blue),
+                 '-s', '{}'.format(speed)]
             )
 
     def change_mode(self):
