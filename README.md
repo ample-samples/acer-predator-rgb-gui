@@ -12,11 +12,12 @@ This application was created to help users control their keyboard lights in a us
 ## Installation
 
 ### Dependencies
-The GUI requires Python, Tkinter and CustomTkinter to run.
+The GUI requires Linux Headers, Python, Tkinter and CustomTkinter to run.
 
 #### Arch
+IMPORTANT NOTE: the linux headers are kernel specific. For example if you are using the zen-kernel, you would use ```linux-zen-headers``` instead of ```linux-headers```.
 ```
-sudo pacman -S python tk
+sudo pacman -S linux-headers python tk
 yay -S customtkinter
 ```
 
